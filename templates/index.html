@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Filega Movie Recommendation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        padding-top: 40px;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      input {
+        width: 100%;
+        height: 40px;
+        padding: 5px 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+      }
+
+      #suggestion-box {
+        margin-top: 20px;
+        text-align: left;
+      }
+      #suggestion-box a:hover {
+        background-color: #e9ecef;
+      }
+      #footer {
+        margin-top: 40px;
+      }
+
+      #footer p {
+        margin-bottom: 0;
+      }
+
+      #footer .social-links a {
+        margin: 0 10px;
+        color: #495057;
+        font-size: 24px;
+      }
+
+      #footer .social-links a:hover {
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Welcome to Filega Movie Recommendation, a site powered by machine
+        learning
+      </h1>
+      <p>
+        Our recommendation engine is trained on a dataset of 7,120 movies from
+        the years 2000 to 2023, featuring the top 300 movies from each year
+        based on popularity. <br />Filega can suggest the top 10 movies based on
+        your preferences. Simply enter a movie title, and our algorithm will
+        provide you with a list of recommended movies that match your interests.
+        Feel free to explore the site and discover new movies to watch!
+      </p>
+      <div class="mb-3">
+        <input
+          type="text"
+          id="movie-input"
+          class="form-control"
+          placeholder="Type a movie title..."
+        />
+      </div>
+      <div id="suggestion-box"></div>
+    </div>
+
+    <div id="footer">
+      <p>Developed by Yaekob Demisse</p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/yaekob-demisse/" target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="https://github.com/Jamescog" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/7ef9daaa9b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const input = document.getElementById("movie-input");
+      const suggestionBox = document.getElementById("suggestion-box");
+      const movieTitles = {{ movie_titles | tojson }};
+
+      input.addEventListener("input", () => {
+        const userInput = input.value.toLowerCase();
+        if (userInput.trim() === "") {
+          suggestionBox.innerHTML = "";
+        } else {
+          const suggestions = movieTitles.filter((title) =>
+            title.toLowerCase().includes(userInput)
+          );
+
+          suggestionBox.innerHTML = "";
+          suggestions.forEach((suggestion) => {
+            const suggestionElement = document.createElement("a");
+            suggestionElement.href = `http://localhost:5000/recommend?name=${suggestion}`;
+            suggestionElement.textContent = suggestion;
+            suggestionElement.classList.add(
+              "d-block",
+              "p-2",
+              "bg-light",
+              "rounded",
+              "text-decoration-none",
+              "text-dark"
+            );
+            suggestionBox.appendChild(suggestionElement);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
