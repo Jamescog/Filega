@@ -126,7 +126,11 @@
           suggestionBox.innerHTML = "";
           suggestions.forEach((suggestion) => {
             const suggestionElement = document.createElement("a");
+<<<<<<< HEAD
             suggestionElement.href = `https://localhost:5000/recommend?name=${suggestion}`;
+=======
+            suggestionElement.href = `https://fi-lega.onrender.com/recommend?name=${suggestion}`;
+>>>>>>> 35083a1f82b2c98104bcd1f07753e029a802c6d4
             suggestionElement.textContent = suggestion;
             suggestionElement.classList.add(
               "d-block",
