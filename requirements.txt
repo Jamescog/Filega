@@ -20,5 +20,6 @@ setuptools==41.2.0
 six==1.15.0
 threadpoolctl==2.1.0
 tqdm==4.47.0
+scipy
 tzdata==2021.1
 Werkzeug==1.0.1
