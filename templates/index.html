@@ -87,7 +87,7 @@
           type="text"
           id="movie-input"
           class="form-control"
-          placeholder="Type a movie title..."
+          placeholder="Type a movie title... eg.John Wick, 3 Idiots"
         />
       </div>
       <div id="suggestion-box"></div>
@@ -126,7 +126,7 @@
           suggestionBox.innerHTML = "";
           suggestions.forEach((suggestion) => {
             const suggestionElement = document.createElement("a");
-            suggestionElement.href = `http://localhost:5000/recommend?name=${suggestion}`;
+            suggestionElement.href = `https://localhost:5000/recommend?name=${suggestion}`;
             suggestionElement.textContent = suggestion;
             suggestionElement.classList.add(
               "d-block",
