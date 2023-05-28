@@ -126,7 +126,7 @@
           suggestionBox.innerHTML = "";
           suggestions.forEach((suggestion) => {
             const suggestionElement = document.createElement("a");
-            suggestionElement.href = `http://localhost:5000/recommend?name=${suggestion}`;
+            suggestionElement.href = `http://localhost:10000/recommend?name=${suggestion}`;
             suggestionElement.textContent = suggestion;
             suggestionElement.classList.add(
               "d-block",
