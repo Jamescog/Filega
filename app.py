@@ -19,10 +19,10 @@ def recommend():
     name = request.args.get('name')
     movie = df[df['title'] == name].iloc[0]
     title = movie['title']
-    genre = movie['genre'].strip("[]'")
-    actors = [actor.strip("[]'") for actor in movie['actors'].split(', ')]
+    genre = movie['genre'].replace("'", "").replace('"', "") # remove quotes from genre
+    actors = [actor.strip("[]'") for actor in movie['actors'].split(', ')] # remove brackets and quotes from actors
     actors = actors[:5]
-    director = movie['directors'][0].strip("[]'")
+    director = movie['directors'][0].strip("[]'") # remove brackets and quotes from director
     recommended_movies = recommend_movies(movie['feature'])
     recommended_movies = recommended_movies[1:]
 
@@ -30,10 +30,10 @@ def recommend():
     for recommended_movie in recommended_movies:
         recommended_movie_info = df[df['title'] == recommended_movie].iloc[0]
         recommended_movie_title = recommended_movie_info['title']
-        recommended_movie_genre = recommended_movie_info['genre'].strip("[]'")
-        recommended_movie_actors = [actor.strip("[]'") for actor in recommended_movie_info['actors'].split(', ')]
+        recommended_movie_genre = recommended_movie_info['genre'].replace("'", "").replace('"', "").strip("[]'")
+        recommended_movie_actors = [actor.strip("[]'") for actor in recommended_movie_info['actors'].split(', ')] 
         recommended_movie_actors = recommended_movie_actors[:5]
-        recommended_movie_director = recommended_movie_info['directors'].strip("[]'")
+        recommended_movie_director = recommended_movie_info['directors'].strip("[]'") 
 
         recommended_movie_dict = {
             'title': recommended_movie_title,
@@ -54,4 +54,4 @@ def recommend():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
