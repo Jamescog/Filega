@@ -67,17 +67,23 @@
       }
 
       #footer {
-        margin-top: 40px;
+        background-color: #f8f9fa;
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid #e9ecef;
       }
 
       #footer p {
-        margin-bottom: 0;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #495057;
       }
 
       #footer .social-links a {
         margin: 0 10px;
         color: #495057;
         font-size: 24px;
+        transition: color 0.3s;
       }
 
       #footer .social-links a:hover {
@@ -93,7 +99,7 @@
       </h1>
       <p>
         Filega is a movie recommendation site powered by machine learning. It
-        can suggest the top 10 movies that match your interests based on a movie
+        can suggest the top movies that match your interests based on a movie
         title you enter. Explore and enjoy!
       </p>
       <div class="mb-3">
@@ -107,16 +113,16 @@
       <div id="suggestion-box"></div>
     </div>
 
-    <div id="footer">
-      <p>Developed by Yaekob Demisse</p>
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/yaekob-demisse/" target="_blank"
-          ><i class="fab fa-linkedin"></i
-        ></a>
-        <a href="https://github.com/Jamescog" target="_blank"
-          ><i class="fab fa-github"></i
-        ></a>
-      </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/yaekob-demisse/" target="_blank"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+      <a href="https://github.com/Jamescog" target="_blank"
+        ><i class="fab fa-github"></i
+      ></a>
+      <a href="https://t.me/Jamescog" target="_blank"
+        ><i class="fab fa-telegram"></i
+      ></a>
     </div>
 
     <script
@@ -140,7 +146,7 @@
           suggestionBox.innerHTML = "";
           suggestions.forEach((suggestion) => {
             const suggestionElement = document.createElement("a");
-            suggestionElement.href = `http://localhost:5000/recommend?name=${encodeURIComponent(suggestion)}`;
+            suggestionElement.href = `https://fi-lega.onrender.com/recommend?name=${encodeURIComponent(suggestion)}`;
             suggestionElement.textContent = suggestion;
             suggestionElement.classList.add(
               "d-block",
