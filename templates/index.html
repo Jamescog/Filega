@@ -140,7 +140,7 @@
           suggestionBox.innerHTML = "";
           suggestions.forEach((suggestion) => {
             const suggestionElement = document.createElement("a");
-            suggestionElement.href = `https://fi-lega.onrender.com/recommend?name=${suggestion}`;
+            suggestionElement.href = `http://localhost:5000/recommend?name=${encodeURIComponent(suggestion)}`;
             suggestionElement.textContent = suggestion;
             suggestionElement.classList.add(
               "d-block",

@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 import json
 import pandas as pd
-from the_engine import recommend_movies
+#from the_engine import recommend_movies
+from count_engine import recommend_movies
 
 df = pd.read_csv('cleaned_movie_data.csv')
 app = Flask(__name__)
@@ -17,6 +18,7 @@ def index():
 @app.route('/recommend', methods=['GET'])
 def recommend():
     name = request.args.get('name')
+    print(name)
     movie = df[df['title'] == name].iloc[0]
     title = movie['title']
     genre = movie['genre'].replace("'", "").replace('"', "") # remove quotes from genre

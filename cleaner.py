@@ -2,6 +2,7 @@ import pandas as pd
 import ast
 import nltk
 import re
+import csv
 
 # Load the movie data into a DataFrame
 movie_df = pd.read_csv('movie_data.csv')
@@ -50,12 +51,15 @@ for index, row in movie_df.iterrows():
     genre = ast.literal_eval(row['genre'])
     actors = ast.literal_eval(row['actors'])
     director = ast.literal_eval(row['directors'])
+    actors = [a.replace("'", "*") for a in actors]
+    director = [d.replace("'", "*") for d in director]
     summary = row['clean_summary']
 
     # Format genre, actors, and director
     genre_str = ' '.join([f"genre-{g.lower()}" for g in genre])
-    actors_str = ' '.join([f"actor-{a.lower()}" for a in actors])
-    director_str = ' '.join([f"director-{d}" for d in director])
+    actors_str = ' '.join([f"actor-{a.lower().replace(' ', '+')}" for a in actors])
+    director_str = ' '.join([f"director-{d.replace(' ', '+')}" for d in director])
+    
 
     # Create the combined string
     combined_string = f"{genre_str} {actors_str} {director_str} Summary: {summary}"
@@ -65,7 +69,6 @@ for index, row in movie_df.iterrows():
 movie_df['feature'] = combined_strings
 
 # Save the modified DataFrame to a new CSV file
-movie_df.to_csv('modified_movie_data.csv', index=False)
-
+movie_df.to_csv('cleaned_movie_data.csv', index=False, quoting=csv.QUOTE_NONNUMERIC)
 # Print the DataFrame with the 'feature' column
 print(movie_df['feature'])
